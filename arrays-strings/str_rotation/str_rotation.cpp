@@ -5,11 +5,7 @@ using namespace std;
 
 bool is_str_rot(string a, string b) {
   a += a;
-  if (a.find(b) != string::npos) {
-    return true;
-  } else {
-    return false;
-  }
+  return (a.find(b) != string::npos);
 }
 
 void test(string a, string b, bool expected) {
