@@ -1,5 +1,8 @@
 use std::error;
 use std::fmt;
+use std::f64;
+
+static EPSILON: f64 = 0.0000001;
 
 #[derive(Debug)]
 pub struct Point {
@@ -9,10 +12,8 @@ pub struct Point {
 
 impl PartialEq for Point {
     fn eq(&self, other: &Point) -> bool {
-        const EPSILON: f64 = 0.00001;
-
-        self.x - other.x < EPSILON
-        && self.y - other.y < EPSILON
+        (self.x - other.x).abs() < EPSILON
+        && (self.y - other.y).abs() < EPSILON
     }
 }
 
@@ -28,7 +29,11 @@ impl Line {
     }
 
     pub fn parallel_to(&self, other: &Line) -> bool {
-        self.slope() == other.slope()
+        if self.slope() == f64::INFINITY
+            && other.slope() == f64::INFINITY {
+            return true;
+        }
+        (self.slope() - other.slope()).abs() < EPSILON
     }
 }
 
