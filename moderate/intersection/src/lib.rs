@@ -86,16 +86,16 @@ mod tests {
     fn slope_half() {
         let line = Line {
             start: Point { x: 0.0, y: 0.0 },
-            end: Point { x: 1.0, y: 1.0/2.0 }
+            end: Point { x: 1.0, y: 0.5 }
         };
-        assert_eq!(line.slope(), 1.0/2.0)
+        assert_eq!(line.slope(), 0.5)
     }
 
     #[test]
     fn slope_infinity() {
         let line = Line {
             start: Point { x: 0.0, y: 0.0 },
-            end: Point { x: 0.0, y: 1.0/2.0 }
+            end: Point { x: 0.0, y: 0.5 }
         };
         assert_eq!(line.slope().abs(), std::f64::INFINITY)
     }
