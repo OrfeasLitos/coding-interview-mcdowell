@@ -151,4 +151,17 @@ mod tests {
         };
         assert_eq!(intersection(&a, &b).unwrap(), Point { x: 1.0, y: 1.0 });
     }
+
+    #[test]
+    fn same_line() {
+        let a = Line {
+            start: Point { x: -2.0, y: 0.0 },
+            end: Point { x: 4.0, y: 2.0 }
+        };
+        let b = Line {
+            start: Point { x: -5.0, y: -1.0 },
+            end: Point { x: 7.0, y: 3.0 }
+        };
+        assert_eq!(intersection(&a, &b).unwrap_err(), ParallelError);
+    }
 }
