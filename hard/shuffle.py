@@ -16,7 +16,18 @@ DECK_SIZE = 52
 
 import random
 
-def shuffle(size):
+def diy_shuffle(size):
+    unshuffled = list(range(0, size))
+    shuffled = list()
+
+    while unshuffled:
+        pos = int(random.random() * len(unshuffled))
+        card = unshuffled.pop(pos)
+        shuffled.append(card)
+
+    return shuffled
+
+def proper_shuffle(size):
     unshuffled = set(range(0, size))
     shuffled = list()
 
@@ -27,16 +38,23 @@ def shuffle(size):
 
     return shuffled
 
+def shuffle(size, proper):
+    if proper:
+        return proper_shuffle(size)
+    else:
+        return diy_shuffle(size)
+
 def test_size_uniqueness(size):
-    deck = shuffle(size)
-    checked = set()
+    for p in [True, False]:
+        deck = shuffle(size, p)
+        checked = set()
 
-    while deck:
-        top = deck.pop()
-        assert(top not in checked)
-        checked.add(top)
+        while deck:
+            top = deck.pop()
+            assert(top not in checked)
+            checked.add(top)
 
-    assert(len(checked) == size)
+        assert(len(checked) == size)
 
 if __name__ == "__main__":
     test_size_uniqueness(DECK_SIZE)
