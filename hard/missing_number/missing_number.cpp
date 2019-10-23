@@ -8,12 +8,12 @@
 
 using namespace std;
 
-class BitwiseArray {
+class BitwiseVector {
   private:
     vector<size_t> numbers;
 
   public:
-    BitwiseArray(size_t max, size_t missing) {
+    BitwiseVector(size_t max, size_t missing) {
       numbers = {};
       for (size_t i = 0; i <= max; i++) {
         if (i != missing) {
@@ -45,12 +45,12 @@ class BitwiseArray {
     }
 };
 
-// for each bit position, starting from LSB and with the full array,
+// for each bit position, starting from LSB and with the full vector,
 // group elements based on their bit. The missing number has at this
 // position a bit equal to that of the group with the least elements.
 // In the next iteration apply the above to the smallest group. Repeat
 // for as many bits as needed to represent n.
-size_t find_missing_number(BitwiseArray arr, size_t n) {
+size_t find_missing_number(BitwiseVector vec, size_t n) {
   // vector faster than unordered_set...
   vector<size_t> left {};
   vector<size_t> right {};
@@ -71,7 +71,7 @@ size_t find_missing_number(BitwiseArray arr, size_t n) {
 
     // iterates to_check.size() ~== n/(2^rank) times
     for (auto i: to_check) {
-      size_t bit = arr.get(i, rank);
+      size_t bit = vec.get(i, rank);
       (bit) ? right.push_back(i) : left.push_back(i);
     }
 
@@ -88,7 +88,7 @@ int main() {
 
   for (auto i = 1; i < 300; i++) {
     for (auto j = 0; j <= i; j++) {
-      auto b = BitwiseArray(i, j);
+      auto b = BitwiseVector(i, j);
       auto res = find_missing_number(b, i);
 
       if (res != j) {
