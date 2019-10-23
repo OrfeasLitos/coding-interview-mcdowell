@@ -70,9 +70,9 @@ size_t find_missing_number(BitwiseArray arr, size_t n) {
     right.clear();
 
     // iterates to_check.size() ~== n/(2^rank) times
-    for (auto it = to_check.begin(); it != to_check.end(); it++) {
-      size_t bit = arr.get(*it, rank);
-      (bit) ? right.push_back(*it) : left.push_back(*it);
+    for (auto i: to_check) {
+      size_t bit = arr.get(i, rank);
+      (bit) ? right.push_back(i) : left.push_back(i);
     }
 
     to_check.clear(); // TODO: figure out if this is redundant
