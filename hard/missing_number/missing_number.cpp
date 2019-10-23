@@ -29,18 +29,9 @@ class BitwiseArray {
       return (numbers[i] >> j) & 1;
     }
 
-    // TODO: understand which print method is better
-    void print_iterator() {
-      for (vector<size_t>::iterator it = numbers.begin();
-        it != numbers.end(); it++) {
-        cout << *it << ' ';
-      }
-      cout << '\n';
-    }
-
     void print() {
-      for (size_t i = 0; i < numbers.size(); i++) {
-        cout << numbers[i] << ' ';
+      for (auto i: numbers) {
+        cout << i << ' ';
       }
       cout << '\n';
     }
