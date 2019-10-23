@@ -10,7 +10,6 @@ using namespace std;
 
 class BitwiseArray {
   private:
-    // TODO: understand if array is better
     vector<size_t> numbers;
 
   public:
@@ -52,6 +51,7 @@ class BitwiseArray {
 // In the next iteration apply the above to the smallest group. Repeat
 // for as many bits as needed to represent n.
 size_t find_missing_number(BitwiseArray arr, size_t n) {
+  // vector faster than unordered_set...
   vector<size_t> left {};
   vector<size_t> right {};
 
