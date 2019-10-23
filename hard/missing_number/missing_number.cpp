@@ -75,7 +75,6 @@ size_t find_missing_number(BitwiseArray arr, size_t n) {
       (bit) ? right.push_back(i) : left.push_back(i);
     }
 
-    to_check.clear(); // TODO: figure out if this is redundant
     size_t bit_of_missing = (right.size() < left.size());
     to_check = (bit_of_missing) ? right : left;
     num |= (bit_of_missing << rank);
