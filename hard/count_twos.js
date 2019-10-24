@@ -37,9 +37,7 @@ function split_number(n, rank) {
     n = Math.floor(n/10)
   }
 
-  smaller = (smaller.length === 0) ? null : Number(smaller.join(''))
-  larger = (larger.length === 0) ? null : Number(larger.join(''))
-  return [smaller, digit, larger]
+  return [Number(smaller.join('')), digit, Number(larger.join(''))]
 }
 
 function count_digits_range_fast(n, wanted) {
