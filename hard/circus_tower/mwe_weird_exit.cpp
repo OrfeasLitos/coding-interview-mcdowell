@@ -3,7 +3,7 @@
 
 class A {
   public:
-    int x;
+    int x = 4;
     int y;
 };
 
@@ -15,18 +15,15 @@ class B {
 };
 
 int main() {
+  std::vector<A *> pt_vec;
+
   A a;
-  a.x = 4;
   std::vector<A> vec;
   vec.push_back(a);
-  std::vector<A *> pt_vec;
-  for (A el: vec) {
+
+  for (A& el: vec) {
     pt_vec.push_back(&el);
   }
-  std::cout << vec[0].x << std::endl;
   B b = B(pt_vec);
-  std::cout << vec[0].x << std::endl;
-  // TODO: understand why if next line is around,
-  //       previous line works as expected
   //exit(1);
 }
