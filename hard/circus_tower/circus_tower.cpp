@@ -40,11 +40,9 @@ class OrderedGraph {
     std::map<Acrobat*, std::vector<Acrobat*>> adj_list;
 
     OrderedGraph(std::vector<Acrobat*> members) {
-      std::cout << *members[0] << '\n';
-      exit(1); // TODO: understand how above is different from l. 96
-      for (auto member: members) {
+      for (auto& member: members) {
         std::vector<Acrobat*> bigger {};
-        for (auto other: members) {
+        for (auto& other: members) {
           if (*member < *other) {
             bigger.push_back(other);
           }
@@ -62,7 +60,7 @@ class OrderedGraph {
 
 std::ostream &operator <<(std::ostream &os, const OrderedGraph &graph) {
   for (auto const &[member, bigger]: graph.adj_list) {
-    os << member << ": ";
+    os << *member << ": ";
     for (auto neighbor: bigger) {
       os << *neighbor << " ";
     }
@@ -90,13 +88,10 @@ unsigned int find_tallest_tower(std::vector<Acrobat*> neighbors, OrderedGraph gr
 
 unsigned int find_tallest_tower(std::vector<Acrobat> group) {
   std::vector<Acrobat*> pointers_to_group = {};
-  for (auto member: group) {
+  for (auto& member: group) {
     pointers_to_group.push_back(&member);
   }
-  std::cout << *pointers_to_group[0] << '\n';
   auto graph = OrderedGraph(pointers_to_group);
-  // TODO: understand why if next line is around, things in TODO above work!?
-  exit(1);
   // -1 for top layer that doesn't correspond to a node
   return find_tallest_tower(pointers_to_group, graph) - 1;
 }
@@ -121,23 +116,23 @@ void test(unsigned int expected, std::vector<Acrobat> gang) {
 int main() {
   test_acrobat();
 
-//  const std::vector<Acrobat> gang {
-//    Acrobat(65, 100), Acrobat(70, 150), Acrobat(56, 90),
-//    Acrobat(75, 190), Acrobat(60, 95), Acrobat(68, 110)
-//  };
-//  test(6, gang);
-//
-//  const std::vector<Acrobat> gang2 {
-//    Acrobat(1, 10), Acrobat(2, 9), Acrobat(3, 8),
-//    Acrobat(4, 7), Acrobat(5, 6), Acrobat(6, 5)
-//  };
-//  test(1, gang2);
-//
-//  const std::vector<Acrobat> gang3 {
-//    Acrobat(1, 1), Acrobat(1, 1), Acrobat(1, 1),
-//    Acrobat(1, 1), Acrobat(1, 1), Acrobat(1, 1)
-//  };
-//  test(1, gang3);
+  const std::vector<Acrobat> gang {
+    Acrobat(65, 100), Acrobat(70, 150), Acrobat(56, 90),
+    Acrobat(75, 190), Acrobat(60, 95), Acrobat(68, 110)
+  };
+  test(6, gang);
+
+  const std::vector<Acrobat> gang2 {
+    Acrobat(1, 10), Acrobat(2, 9), Acrobat(3, 8),
+    Acrobat(4, 7), Acrobat(5, 6), Acrobat(6, 5)
+  };
+  test(1, gang2);
+
+  const std::vector<Acrobat> gang3 {
+    Acrobat(1, 1), Acrobat(1, 1), Acrobat(1, 1),
+    Acrobat(1, 1), Acrobat(1, 1), Acrobat(1, 1)
+  };
+  test(1, gang3);
 
   const std::vector<Acrobat> gang4 {
     Acrobat(1, 1), Acrobat(3, 2), Acrobat(4, 3),
